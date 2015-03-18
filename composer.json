@@ -1,0 +1,23 @@
+{
+    "name": "democracyapps/domain-context",
+    "description": "Utility to facilitate mapping parts of a route hierarchy to separate domains",
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Eric Jackson",
+            "email": "Eric.Jackson@democracyapps.us"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {"DemocracyApps\\DomainContext\\": "src/"}
+    }
+}
