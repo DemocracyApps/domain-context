@@ -16,7 +16,7 @@ class DomainContext {
 
     protected $mappedDomains = null;
 
-    public function init (Request $request)
+    public function init (\Request $request)
     {
         $this->currentDomain = $request->getHttpHost();
         if (config('domain-context.mapped_domain_storage') != null) {
