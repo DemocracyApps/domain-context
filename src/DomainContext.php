@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class DomainContext {
     protected $currentDomain = null;
 
-    protected $mappedDomainStorage = 'database';
+    protected $mappedDomainStorage = 'none';
 
     protected $mappedDomains = null;
 
@@ -37,7 +37,6 @@ class DomainContext {
             foreach ($domains as $domain) {
                 $this->mappedDomains[$domain->name] = $domain->identifier;
             }
-            throw new \Exception ("DB implementation of DomainContext not yet implemented");
         }
         \Log::info("DomainContext init with domain " . $this->currentDomain);
     }
