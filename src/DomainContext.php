@@ -8,6 +8,8 @@
 * See the LICENSE.txt file distributed with this source code for full copyright and license information.
 *
 */
+use Illuminate\Http\Request;
+
 
 class DomainContext {
     protected $currentDomain = null;
@@ -16,7 +18,7 @@ class DomainContext {
 
     protected $mappedDomains = null;
 
-    public function init (\Request $request)
+    public function init (Request $request)
     {
         $this->currentDomain = $request->getHttpHost();
         if (config('domain-context.mapped_domain_storage') != null) {
