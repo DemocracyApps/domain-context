@@ -38,7 +38,6 @@ class DomainContext {
                 $this->mappedDomains[$domain->name] = $domain->identifier;
             }
         }
-        \Log::info("DomainContext init with domain " . $this->currentDomain);
     }
 
     public function getDomain()
@@ -51,7 +50,9 @@ class DomainContext {
     }
 
     public function isMapped() {
-        if ($this->currentDomain == 'GollyGee.com') return false;
+        if (array_key_exists($this->currentDomain, $this->mappedDomains)) {
+            return true;
+        }
         return true;
     }
 
