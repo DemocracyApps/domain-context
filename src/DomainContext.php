@@ -53,7 +53,7 @@ class DomainContext {
         if (array_key_exists($this->currentDomain, $this->mappedDomains)) {
             return true;
         }
-        return true;
+        return false;
     }
 
 }
