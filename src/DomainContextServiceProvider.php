@@ -36,7 +36,9 @@ class DomainContextServiceProvider extends ServiceProvider
     public function boot()
     {
         $context = app()->make('DemocracyApps\DomainContext\DomainContext');
-        view()->share(config('view_variable_name'), $context);
+        $vv = config('domain-context.view_variable_name');
+        if ($vv == null) $vv = 'domainContext';
+        view()->share($vv, $context);
 
         $this->publishes([
             __DIR__ . '/config/domain-context.php' => config_path('domain-context.php')
