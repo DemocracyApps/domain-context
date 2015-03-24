@@ -32,8 +32,8 @@ class DomainContext {
             $this->mappedDomains = config('domain-context.mapped_domains');
         }
         else if ($this->mappedDomainStorage == 'database') {
+            $domains = \DB::table(config('mapped_domain_table_name'))->select('domain_name', 'identifier');
             $this->mappedDomains = array();
-            $domains = MappedDomain::all();
             foreach ($domains as $domain) {
                 $this->mappedDomains[$domain->name] = $domain->identifier;
             }

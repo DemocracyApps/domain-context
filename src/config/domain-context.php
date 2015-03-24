@@ -35,4 +35,8 @@ return [
     'mapped_domains' => [
         'example.com' => 1
     ],
+
+    'mapped_domain_table_name' => 'mapped_domains', // Must have at least 'domain_name', 'identifier' columns
+
+    'view_variable_name' => 'domainContext',
 ];

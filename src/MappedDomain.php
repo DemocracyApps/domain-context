@@ -10,6 +10,6 @@
 */
 
 class MappedDomain extends \Eloquent {
-    protected $table = 'categories';
+    protected $table = 'mapped_domains';
 
 }

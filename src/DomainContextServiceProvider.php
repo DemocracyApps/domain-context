@@ -24,6 +24,8 @@ class DomainContextServiceProvider extends ServiceProvider
         $this->app->singleton('DemocracyApps\DomainContext\DomainContext', function ($app) {
             return new DomainContext();
         });
+        $this->app->alias('domain-context', 'DemocracyApps\DomainContext\DomainContext');
+
     }
     
         /**
@@ -33,6 +35,9 @@ class DomainContextServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $context = app()->make('DemocracyApps\DomainContext\DomainContext');
+        view()->share(config('view_variable_name'), $context);
+
         $this->publishes([
             __DIR__ . '/config/domain-context.php' => config_path('domain-context.php')
         ]);
