@@ -8,12 +8,8 @@
 * See the LICENSE.txt file distributed with this source code for full copyright and license information.
 *
 */
-use Illuminate\Http\Request;
-
 
 class DomainContext {
-
-    private $initialized = false;
 
     protected $currentDomain = null;
 
@@ -21,8 +17,9 @@ class DomainContext {
 
     protected $mappedDomains = null;
 
-    public function init (Request $request)
+    public function __construct ()
     {
+        $request = app()->make('Illuminate\Http\Request');
         $this->currentDomain = $request->getHttpHost();
         if (config('domain-context.mapped_domain_storage') != null) {
             $this->mappedDomainStorage = config('domain-context.mapped_domain_storage');
@@ -35,39 +32,27 @@ class DomainContext {
             $this->mappedDomains = config('domain-context.mapped_domains');
         }
         else if ($this->mappedDomainStorage == 'database') {
-            $table = config('domain-context.mapped_domain_table_name');
-            $domains = \DB::table($table)->select($table.'.domain_name', $table.'.identifier')->get();
+            $domains = \DB::table(config('mapped_domain_table_name'))->select('domain_name', 'identifier');
             $this->mappedDomains = array();
             foreach ($domains as $domain) {
-                $this->mappedDomains[$domain->domain_name] = $domain->identifier;
+                $this->mappedDomains[$domain->name] = $domain->identifier;
             }
         }
-        $this->initialized = true;
     }
 
     public function getDomain()
     {
-        if (! $this->initialized) {
-            $this->init(app()->make('Illuminate\Http\Request'));
-        }
         return $this->currentDomain;
     }
 
     public function getDomainIdentifier() {
-        if (! $this->initialized) {
-            $this->init(app()->make('Illuminate\Http\Request'));
-        }
         return $this->mappedDomains[$this->currentDomain];
     }
 
     public function isMapped() {
-        if (! $this->initialized) {
-            $this->init(app()->make('Illuminate\Http\Request'));
-        }
         if (array_key_exists($this->currentDomain, $this->mappedDomains)) {
             return true;
         }
         return false;
     }
-
 }
