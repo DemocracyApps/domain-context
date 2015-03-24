@@ -24,7 +24,7 @@ class DomainContextServiceProvider extends ServiceProvider
         $this->app->singleton('DemocracyApps\DomainContext\DomainContext', function ($app) {
             return new DomainContext();
         });
-        $this->app->alias('domain-context', 'DemocracyApps\DomainContext\DomainContext');
+        //$this->app->alias('domain-context', 'DemocracyApps\DomainContext\DomainContext');
 
     }
     

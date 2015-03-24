@@ -12,6 +12,6 @@ class DomainContextFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'domain-context';
+        return 'DemocracyApps\DomainContext\DomainContext';
     }
 }
