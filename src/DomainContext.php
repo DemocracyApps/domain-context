@@ -35,10 +35,11 @@ class DomainContext {
             $this->mappedDomains = config('domain-context.mapped_domains');
         }
         else if ($this->mappedDomainStorage == 'database') {
-            $domains = \DB::table(config('mapped_domain_table_name'))->select('domain_name', 'identifier');
+            $table = config('domain-context.mapped_domain_table_name');
+            $domains = \DB::table($table)->select($table.'.domain_name', $table.'.identifier')->get();
             $this->mappedDomains = array();
             foreach ($domains as $domain) {
-                $this->mappedDomains[$domain->name] = $domain->identifier;
+                $this->mappedDomains[$domain->domain_name] = $domain->identifier;
             }
         }
         $this->initialized = true;
