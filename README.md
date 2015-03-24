@@ -50,7 +50,7 @@ Next, publish the configuration file by running
 
     php artisan vendor:publish
 
-and edit 'config/domain-context.php'. There are current three configuration settings in use in the package.
+and edit 'config/domain-context.php'. There are currently four configuration settings in use in the package.
 
 #### mapped_domain_storage (default: 'config')
 
