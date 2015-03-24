@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 
 class DomainContext {
+
+    private $initialized = false;
+
     protected $currentDomain = null;
 
     protected $mappedDomainStorage = 'none';
@@ -38,18 +41,28 @@ class DomainContext {
                 $this->mappedDomains[$domain->name] = $domain->identifier;
             }
         }
+        $this->initialized = true;
     }
 
     public function getDomain()
     {
+        if (! $this->initialized) {
+            $this->init(app()->make('Illuminate\Http\Request'));
+        }
         return $this->currentDomain;
     }
 
     public function getDomainIdentifier() {
+        if (! $this->initialized) {
+            $this->init(app()->make('Illuminate\Http\Request'));
+        }
         return $this->mappedDomains[$this->currentDomain];
     }
 
     public function isMapped() {
+        if (! $this->initialized) {
+            $this->init(app()->make('Illuminate\Http\Request'));
+        }
         if (array_key_exists($this->currentDomain, $this->mappedDomains)) {
             return true;
         }
