@@ -45,7 +45,7 @@ For convenience, you may also add the Facade to app.php
 ```php
 'aliases' => [
     '...',
-'DomainContext' => 'DemocracyApps\DomainContext\DomainContextFacade',
+    'DomainContext' => 'DemocracyApps\DomainContext\DomainContextFacade',
     ];
 ```
 
@@ -71,11 +71,11 @@ associated with them. The identifiers may be of any type. In the example below, 
 is associated internally with a short code of 'golly'. A more common use might be to associate it with an ID of a database
 model, as in the second line. 
 
-```json
-'mapped_domains' => [
-    'market.gollygee.com' => 'golly',
-    'stdexample.com' => 133
-]
+```php
+    'mapped_domains' => [
+        'market.gollygee.com' => 'golly',
+        'stdexample.com' => 133
+    ]
 ```
 
 #### mapped_domain_table_name (default: 'mapped_domains')
