@@ -21,28 +21,33 @@ mapped differently from the default and to get the identifier for the internal o
 
 Begin by installing this package through Composer.
 
-    {
-        "require": {
-            "democracyapps/domain-context": "dev-master"
-        }
+```json
+{
+    "require": {
+        "democracyapps/domain-context": "dev-master"
     }
+}
+```
 
 Add the service provider to app.php
 
-
+```php
     // app/config/app.php
     
     'providers' => [
         '...',
         'DemocracyApps\DomainContext\DomainContextServiceProvider',
     ];
+```
 
+```php
 For convenience, you may also add the Facade to app.php
 
     	'aliases' => [
             '...',
         'DomainContext' => 'DemocracyApps\DomainContext\DomainContextFacade',
     ];
+```
 
 ### Configuration Parameters
 
@@ -66,10 +71,12 @@ associated with them. The identifiers may be of any type. In the example below, 
 is associated internally with a short code of 'golly'. A more common use might be to associate it with an ID of a database
 model, as in the second line. 
 
+```json
     'mapped_domains' => [
         'market.gollygee.com' => 'golly',
         'stdexample.com' => 133
     ]
+```
 
 #### mapped_domain_table_name (default: 'mapped_domains')
 
@@ -101,25 +108,30 @@ to load client information from a table ('golly' in first example above).
 
 To use them in the routes file, the simplest thing to do is use the facade. For example:
 
+```php
     if (\DomainContext::isMapped()) {
         require app_path().'/Http/Routes/mapped.php'; // all the routes associated with mapped domains
     }
     else {
         require app_path().'/Http/Routes/market.php'; // all the routes associated with the platform
     }
+```
 
 The facade can, of course, also be used in a controller or anywhere else, however, you can also simply inject the DomainContext
 object into your controller method, e.g.,
 
+```php
     public function show($id, DomainContext $context)
     {
         $short = $context->getDomainIdentifier();
         $tc = Company::where('short_name', '=', $short)->first();
         ...
+```
             
 Finally, within views, the DomainContext is always available as $domainContext (or the variable name you set in the 
 configuration file). For example, you might have part of a menu depend on whether domain is mapped or not:
 
+```html
     <li class="dropdown">
         @if ($domainContext->isMapped())
             <a href="/products" class="dropdown-toggle" >All Products</a>
@@ -131,6 +143,7 @@ configuration file). For example, you might have part of a menu depend on whethe
             </ul>
         @endif
     </li>
+```
 
 ## Problems and Plans
  
